@@ -37,6 +37,7 @@ const userSlice = createSlice({
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["user"],
 };
 
 const rootReducer = combineReducers({
@@ -55,7 +56,7 @@ const store = configureStore({
     }),
 });
 
-store.__persistor = persistStore(store);
+export const persistor = persistStore(store);
 
 export const userActions = userSlice.actions;
 export default store;
