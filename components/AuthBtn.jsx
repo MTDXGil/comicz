@@ -1,8 +1,12 @@
-"use client ";
+"use client";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import LogoutBtn from "./LogoutBtn";
 
 export default function AuthBtn() {
-  return (
+  const isLogin = useSelector((state) => state.user.isLogin);
+
+  return !isLogin ? (
     <>
       <Link href="/register" className="btn register-btn">
         Register
@@ -11,5 +15,7 @@ export default function AuthBtn() {
         Login
       </Link>
     </>
+  ) : (
+    <LogoutBtn />
   );
 }

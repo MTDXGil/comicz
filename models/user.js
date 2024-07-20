@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import passportLocalMongoose from "passport-local-mongoose";
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -13,8 +12,6 @@ const userSchema = new mongoose.Schema({
   },
   favorites: [{ type: String }],
 });
-
-userSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 

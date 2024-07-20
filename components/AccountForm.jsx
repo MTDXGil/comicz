@@ -5,8 +5,11 @@ import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { getUser } from "@/lib/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "@/store/store";
 
 export default function AccountForm({ hasConfirmPassword }) {
+  const dispatch = useDispatch();
   const notify = (type, text) => toast[type](text);
 
   const username = useRef();
@@ -27,13 +30,11 @@ export default function AccountForm({ hasConfirmPassword }) {
           : null,
       });
       router.back();
-      setTimeout(async () => {
-        router.refresh();
-        const user = JSON.parse(await getUser());
-        user.favorites.forEach((favSlug) =>
-          localStorage.setItem(`favorite_${favSlug}`, favSlug)
-        );
-      }, 100);
+      const user = JSON.parse(await getUser());
+      user.favorites.forEach((favSlug) =>
+        dispatch(userActions.addFavoriteComics({ comicSlug: favSlug }))
+      );
+      dispatch(userActions.login());
       notify(
         "success",
         hasConfirmPassword

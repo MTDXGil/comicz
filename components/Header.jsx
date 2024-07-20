@@ -2,14 +2,10 @@ import Image from "next/image";
 import Logo from "@/assets/logo.png";
 import Link from "next/link";
 import SearchBtn from "./SearchBtn";
-import { checkAuthenticated } from "@/lib/auth";
-import LogoutBtn from "./LogoutBtn";
 import AuthBtn from "./AuthBtn";
 import DropdownHeader from "./DropdownHeader";
 
 export default async function Header() {
-  const isAuthenticated = await checkAuthenticated();
-
   return (
     <header>
       <DropdownHeader />
@@ -32,8 +28,7 @@ export default async function Header() {
       </ul>
       <div className="navbar-action">
         <SearchBtn />
-        {!isAuthenticated && <AuthBtn />}
-        {isAuthenticated && <LogoutBtn />}
+        <AuthBtn />
       </div>
     </header>
   );

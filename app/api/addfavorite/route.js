@@ -5,8 +5,8 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   await connectMongoDB();
-  const { isAuthenticated, comicSlug } = await req.json();
-  const user = await User.findOne({ _id: isAuthenticated });
+  const { userId, comicSlug } = await req.json();
+  const user = await User.findOne({ _id: userId });
 
   if (!user.favorites.includes(comicSlug)) user.favorites.unshift(comicSlug);
   else

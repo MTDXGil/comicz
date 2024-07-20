@@ -2,21 +2,18 @@
 
 import { deleteToken } from "@/lib/auth";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { userActions } from "@/store/store";
 
 export default function LogoutBtn() {
-  function clearFavorites() {
-    Object.keys(localStorage).forEach((key) => {
-      if (key.startsWith("favorite_")) {
-        localStorage.removeItem(key);
-      }
-    });
-  }
+  const dispatch = useDispatch();
 
   const notify = (type, text) => toast[type](text);
 
   async function handleClick() {
+    dispatch(userActions.logout());
     await deleteToken();
-    clearFavorites();
+    dispatch(userActions.clearFavoriteComics());
     notify("success", "Đăng xuất thành công!");
   }
 

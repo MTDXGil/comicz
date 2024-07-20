@@ -10,6 +10,7 @@ config.autoAddCss = false;
 
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
+import Providers from "@/components/Providers";
 
 export const metadata = {
   title: "Comicz - Đọc truyện tranh online",
@@ -21,21 +22,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <ToastContainer
-          position="top-right"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable={false}
-          pauseOnHover={false}
-          theme="light"
-        />
+        <Providers>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable={false}
+            pauseOnHover={false}
+            theme="light"
+          />
+        </Providers>
       </body>
     </html>
   );

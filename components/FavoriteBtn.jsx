@@ -1,13 +1,18 @@
 "use client";
-import { checkAuthenticated, getUser } from "@/lib/auth";
+import { getUser } from "@/lib/auth";
+import { userActions } from "@/store/store";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 export default function FavoriteBtn({ comicSlug }) {
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const dispatch = useDispatch();
+
   const [isAdded, setIsAdded] = useState(false);
   const notify = (type, text) => toast[type](text);
 
@@ -17,21 +22,19 @@ export default function FavoriteBtn({ comicSlug }) {
   }, [comicSlug]);
 
   async function handleClick() {
-    const isAuthenticated = await checkAuthenticated();
-
-    if (isAuthenticated) {
+    if (isLogin) {
       const user = JSON.parse(await getUser());
       await axios.post("/api/addfavorite", {
-        isAuthenticated,
+        userId: user._id,
         comicSlug,
       });
       if (!user.favorites.includes(comicSlug)) {
         setIsAdded(true);
-        localStorage.setItem(`favorite_${comicSlug}`, "true");
+        dispatch(userActions.addFavoriteComics({ comicSlug }));
         notify("success", "Đã thêm vào danh sách của bạn!");
       } else {
         setIsAdded(false);
-        localStorage.removeItem(`favorite_${comicSlug}`);
+        dispatch(userActions.removeFavoriteComics({ comicSlug }));
         notify("success", "Đã xóa khỏi danh sách của bạn!");
       }
     } else {

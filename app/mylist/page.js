@@ -1,23 +1,22 @@
 "use client";
 import ComicFullList from "@/components/ComicFullList";
 import Loading from "@/components/Loading";
-import { checkAuthenticated, getUser } from "@/lib/auth";
 import { GetComicInformation } from "@/lib/comic";
 import { Suspense, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-async function LoadMyListPage() {
+function LoadMyListPage() {
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const favoriteComics = useSelector((state) => state.user.favoriteComics);
+
   const [comics, setComics] = useState({ items: [] });
 
   useEffect(() => {
     async function revalidatePage() {
-      const isAuthenticated = await checkAuthenticated();
-
-      if (isAuthenticated) {
-        const user = JSON.parse(await getUser());
-
+      if (isLogin) {
         setComics({
           items: await Promise.all(
-            user.favorites.map(async (favSlug) => {
+            favoriteComics.map(async (favSlug) => {
               const comicInformation = await GetComicInformation(favSlug);
               return comicInformation.item;
             })
@@ -26,7 +25,7 @@ async function LoadMyListPage() {
       }
     }
     revalidatePage();
-  }, []);
+  }, [isLogin, favoriteComics]);
 
   return <ComicFullList title="Danh sách của tôi" comics={comics} noLoadMore />;
 }
