@@ -13,6 +13,7 @@ import { useState } from "react";
 
 export default function ChapterControl({ chapter, chapterList }) {
   const [openModal, setOpenModal] = useState(false);
+  const chapterNum = Number(chapter);
 
   function toggleModal() {
     setOpenModal((prevValue) => !prevValue);
@@ -21,7 +22,7 @@ export default function ChapterControl({ chapter, chapterList }) {
   return (
     <div className="chapter-control">
       <Link
-        href={`${chapter > 1 ? chapter - 1 : chapter}`}
+        href={`${chapterNum > 1 ? chapterNum - 1 : chapterNum}`}
         className="btn prev-chapter-btn"
       >
         <FontAwesomeIcon icon={faAngleLeft} /> Prev
@@ -40,7 +41,7 @@ export default function ChapterControl({ chapter, chapterList }) {
           />
         )}
       </AnimatePresence>
-      <Link href={`${chapter + 1}`} className="btn next-chapter-btn">
+      <Link href={`${chapterNum + 1}`} className="btn next-chapter-btn">
         Next <FontAwesomeIcon icon={faAngleRight} />
       </Link>
     </div>

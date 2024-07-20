@@ -114,7 +114,7 @@ header {
 
 .banner {
   background-image: url("../assets/banner-background.avif");
-  margin: 100px 20px 70px;
+  margin: 100px 20px 70px 40px;
   height: 400px;
   border-radius: 20px;
   display: flex;
@@ -986,6 +986,11 @@ footer span {
     align-items: center;
     gap: 50px;
   }
+
+  .modal-content-background {
+    width: 600px;
+    height: 700px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -1045,5 +1050,63 @@ footer span {
 
   .carousel {
     display: none;
+  }
+
+  .chapter-container {
+    margin: 120px 0px;
+  }
+}
+
+@media (max-width: 765px) {
+  .comic-detail {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .detail-wrapper {
+    margin-top: 30px;
+  }
+
+  .comic-block-container {
+    margin: 0px 20px 200px;
+  }
+
+  .comic-block-list {
+    justify-content: center;
+  }
+
+  .modal-content-background {
+    width: 500px;
+  }
+}
+
+@media (max-width: 443px) {
+  main {
+    margin: 0;
+  }
+  .comic-item,
+  .comic-item-skeleton {
+    width: 250px;
+    height: 230px;
+  }
+
+  .banner {
+    margin: 100px 0px 70px 3px;
+  }
+
+  .recommend-spotlight {
+    margin-left: 20px;
+  }
+
+  .comic-list {
+    justify-content: center;
+  }
+
+  .modal-content-background {
+    width: 375px;
+  }
+
+  .chapter-menu-input {
+    margin: 80px 0px 30px;
   }
 }

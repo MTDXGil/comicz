@@ -15,17 +15,6 @@ export default function ComicDetailSkeleton() {
             <Skeleton width={200} />
             <Skeleton width={120} />
             <Skeleton width={400} />
-            <div
-              className="comic-popularity-skeleton"
-              style={{ marginBottom: "10px" }}
-            >
-              <span>
-                <Skeleton width={60} />
-              </span>
-              <span>
-                <Skeleton width={60} />
-              </span>
-            </div>
           </div>
           <Skeleton count={3} />
           <div className="play-and-favorite-skeleton">

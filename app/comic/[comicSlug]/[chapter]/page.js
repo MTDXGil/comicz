@@ -2,6 +2,7 @@ import ChapterControl from "@/components/ChapterControl";
 import ChapterSekeleton from "@/components/ChapterSkeleton";
 import { GetChapterImage, GetComicInformation } from "@/lib/comic";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 async function LoadChapter({ comicSlug, chapter }) {
@@ -10,9 +11,14 @@ async function LoadChapter({ comicSlug, chapter }) {
   let chapterInformation = chapterList.find(
     (chapterInf) => chapterInf.chapter_name === chapter
   );
-  const chapterImageList = await GetChapterImage(
-    chapterInformation.chapter_api_data
-  );
+  let chapterImageList;
+  if (chapterInformation) {
+    chapterImageList = await GetChapterImage(
+      chapterInformation.chapter_api_data
+    );
+  } else {
+    return notFound();
+  }
 
   return (
     <div className="chapter-container">

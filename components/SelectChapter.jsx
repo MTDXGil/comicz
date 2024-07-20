@@ -1,6 +1,5 @@
 "use client";
 
-import { GetChapterInformation } from "@/lib/comic";
 import Link from "next/link";
 import { useState } from "react";
 
