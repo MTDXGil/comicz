@@ -1,0 +1,18 @@
+"use server";
+import connectMongoDB from "@/lib/mongodb";
+import User from "@/models/user";
+import { NextResponse } from "next/server";
+
+export async function POST(req) {
+  await connectMongoDB();
+  const { isAuthenticated, comicSlug } = await req.json();
+  const user = await User.findOne({ _id: isAuthenticated });
+
+  if (!user.favorites.includes(comicSlug)) user.favorites.unshift(comicSlug);
+  else
+    user.favorites = user.favorites.filter((favSlug) => favSlug !== comicSlug);
+
+  await user.save();
+
+  return NextResponse.json({ message: "complete sir" });
+}
