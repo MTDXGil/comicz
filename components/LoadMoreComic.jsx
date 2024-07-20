@@ -46,8 +46,12 @@ export default function LoadMoreComic() {
       if (isInView && !isFetching) {
         setIsFetching(true);
         let newComicList;
-        if (genreSlug) {
-          newComicList = await GetComicFunction(genreSlug, currentPage + 1);
+        if (GetComicFunction.name === "GetGenreComic") {
+          if (genreSlug) {
+            newComicList = await GetComicFunction(genreSlug, currentPage + 1);
+          } else {
+            newComicList = await GetComicFunction("all", currentPage + 1);
+          }
         } else {
           newComicList = await GetComicFunction(currentPage + 1);
         }
