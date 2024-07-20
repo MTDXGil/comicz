@@ -19,7 +19,7 @@ export default function LoadMoreComic() {
   let GetComicFunction;
   const [comics, setComics] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const genreSlug = params.genreSlug || "all";
+  const genreSlug = params.genreSlug;
   let [isFetching, setIsFetching] = useState(false);
 
   switch (params.viewAllSlug) {
