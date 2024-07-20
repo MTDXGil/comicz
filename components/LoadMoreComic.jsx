@@ -45,16 +45,7 @@ export default function LoadMoreComic() {
     async function GetMoreComic() {
       if (isInView && !isFetching) {
         setIsFetching(true);
-        let newComicList;
-        if (GetComicFunction.name === "GetGenreComic") {
-          if (genreSlug) {
-            newComicList = await GetComicFunction(genreSlug, currentPage + 1);
-          } else {
-            newComicList = await GetComicFunction("all", currentPage + 1);
-          }
-        } else {
-          newComicList = await GetComicFunction(currentPage + 1);
-        }
+        const newComicList = await GetComicFunction(currentPage + 1, genreSlug);
         setComics((prevValue) => [...prevValue, ...newComicList.items]);
         setCurrentPage((prevValue) => prevValue + 1);
         setTimeout(() => setIsFetching(false), 1000);
