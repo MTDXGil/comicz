@@ -4,7 +4,7 @@ import Link from "next/link";
 import SearchBtn from "./SearchBtn";
 import { checkAuthenticated } from "@/lib/auth";
 import LogoutBtn from "./LogoutBtn";
-import AuthBtn from "./authBtn";
+import AuthBtn from "./AuthBtn";
 
 export default async function Header() {
   const isAuthenticated = await checkAuthenticated();

@@ -26,12 +26,6 @@ export default function AccountForm({ hasConfirmPassword }) {
           ? confirmPassword.current.value
           : null,
       });
-
-      const user = JSON.parse(await getUser());
-      user.favorites.forEach((favSlug) =>
-        localStorage.setItem(`favorite_${favSlug}`, favSlug)
-      );
-
       notify(
         "success",
         hasConfirmPassword
@@ -39,7 +33,13 @@ export default function AccountForm({ hasConfirmPassword }) {
           : "Đăng nhập thành công!"
       );
       router.back();
-      setTimeout(() => router.refresh(), 100);
+      setTimeout(async () => {
+        router.refresh();
+        const user = JSON.parse(await getUser());
+        user.favorites.forEach((favSlug) =>
+          localStorage.setItem(`favorite_${favSlug}`, favSlug)
+        );
+      }, 100);
     } catch (error) {
       if (error.response && error.response.data.errorMessageList) {
         error.response.data.errorMessageList.map((message) =>

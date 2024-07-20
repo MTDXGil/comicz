@@ -19,7 +19,7 @@ export default function LoadMoreComic() {
   let GetComicFunction;
   const [comics, setComics] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const genreSlug = params.genreSlug;
+  const genreSlug = params.genreSlug || "all";
   let [isFetching, setIsFetching] = useState(false);
 
   switch (params.viewAllSlug) {
@@ -46,12 +46,11 @@ export default function LoadMoreComic() {
       if (isInView && !isFetching) {
         setIsFetching(true);
         let newComicList;
-        if (GetComicFunction.name === "GetGenreComic")
-          newComicList = await GetComicFunction(
-            genreSlug || "all",
-            currentPage + 1
-          );
-        else newComicList = await GetComicFunction(currentPage + 1);
+        if (genreSlug) {
+          newComicList = await GetComicFunction(genreSlug, currentPage + 1);
+        } else {
+          newComicList = await GetComicFunction(currentPage + 1);
+        }
         setComics((prevValue) => [...prevValue, ...newComicList.items]);
         setCurrentPage((prevValue) => prevValue + 1);
         setTimeout(() => setIsFetching(false), 1000);
