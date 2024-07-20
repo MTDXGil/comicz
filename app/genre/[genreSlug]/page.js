@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 async function LoadGenreSelectPage({ genreSlug }) {
-  const genreComics = await GetGenreComic(genreSlug, 1);
+  const genreComics = await GetGenreComic(1, genreSlug);
 
   if (!genreComics.titlePage) return notFound();
 

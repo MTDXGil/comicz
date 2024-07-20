@@ -17,7 +17,7 @@ export default async function ComicDetail({ comicSlug }) {
   const randomCategory =
     comicCategory[Math.floor(Math.random() * comicCategory.length)];
   const randomPage = Math.floor(Math.random() * 100);
-  const recommendComic = await GetGenreComic(randomCategory.slug, randomPage);
+  const recommendComic = await GetGenreComic(randomPage, randomCategory.slug);
 
   let totalChapter = 0;
   if (comicInformation.item.chapters[0]) {
