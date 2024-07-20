@@ -7,6 +7,7 @@ import {
   faListUl,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -31,9 +32,14 @@ export default function ChapterControl({ chapter, chapterList }) {
       >
         <FontAwesomeIcon icon={faListUl} /> Chapter List
       </button>
-      {openModal && (
-        <ChapterListModal chapterList={chapterList} toggleModal={toggleModal} />
-      )}
+      <AnimatePresence>
+        {openModal && (
+          <ChapterListModal
+            chapterList={chapterList}
+            toggleModal={toggleModal}
+          />
+        )}
+      </AnimatePresence>
       <Link href={`${chapter + 1}`} className="btn next-chapter-btn">
         Next <FontAwesomeIcon icon={faAngleRight} />
       </Link>

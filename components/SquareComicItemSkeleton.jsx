@@ -11,15 +11,7 @@ export default function SquareComicItemSekelton() {
         style={{ marginLeft: "20px" }}
       />
       <div className="comic-information">
-        <Skeleton width={200} />
-        <div className="comic-popularity-skeleton">
-          <span>
-            <Skeleton width={60} />
-          </span>
-          <span>
-            <Skeleton width={60} />
-          </span>
-        </div>
+        <Skeleton width={200} height={25} />
       </div>
     </li>
   );

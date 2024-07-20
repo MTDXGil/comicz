@@ -26,12 +26,6 @@ export default function AccountForm({ hasConfirmPassword }) {
           ? confirmPassword.current.value
           : null,
       });
-      notify(
-        "success",
-        hasConfirmPassword
-          ? "Tạo tài khoản thành công!"
-          : "Đăng nhập thành công!"
-      );
       router.back();
       setTimeout(async () => {
         router.refresh();
@@ -40,6 +34,12 @@ export default function AccountForm({ hasConfirmPassword }) {
           localStorage.setItem(`favorite_${favSlug}`, favSlug)
         );
       }, 100);
+      notify(
+        "success",
+        hasConfirmPassword
+          ? "Tạo tài khoản thành công!"
+          : "Đăng nhập thành công!"
+      );
     } catch (error) {
       if (error.response && error.response.data.errorMessageList) {
         error.response.data.errorMessageList.map((message) =>

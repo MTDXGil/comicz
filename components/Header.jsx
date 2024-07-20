@@ -5,12 +5,14 @@ import SearchBtn from "./SearchBtn";
 import { checkAuthenticated } from "@/lib/auth";
 import LogoutBtn from "./LogoutBtn";
 import AuthBtn from "./AuthBtn";
+import DropdownHeader from "./DropdownHeader";
 
 export default async function Header() {
   const isAuthenticated = await checkAuthenticated();
 
   return (
     <header>
+      <DropdownHeader />
       <Link href="/">
         <Image src={Logo} alt="Logo" className="logo" />
       </Link>
