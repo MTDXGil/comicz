@@ -34,7 +34,7 @@ export default function SelectChapter({
     }
   }
 
-  for (let i = 1; i < totalChapter; i += blockSize) {
+  for (let i = 1; i <= totalChapter; i += blockSize) {
     const start = i;
     const end = Math.min(i + blockSize - 1, totalChapter);
     blocks.push(

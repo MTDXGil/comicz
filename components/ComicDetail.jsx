@@ -57,7 +57,12 @@ export default async function ComicDetail({ comicSlug }) {
           <div
             dangerouslySetInnerHTML={{ __html: comicInformation.item.content }}
           />
-          <Link href={`${comicSlug}/1`} className="btn play-btn">
+          <Link
+            href={`${comicSlug}/${
+              chapterList[0] ? chapterList[0].chapter_name : ""
+            }`}
+            className="btn play-btn"
+          >
             Đọc truyện
           </Link>
           <FavoriteBtn comicSlug={comicSlug} />
