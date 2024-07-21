@@ -3,24 +3,35 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export default function SelectChapter({ comicSlug, totalChapter }) {
+export default function SelectChapter({
+  comicSlug,
+  totalChapter,
+  allTotalChapter,
+  chapterList,
+}) {
   const [listChapter, setListChapter] = useState([]);
   const blockSize = 50;
   const blocks = [];
 
   async function handleChapterBlockClick(start, end) {
     setListChapter([]);
-    for (let i = start; i <= end; i++) {
+    for (let i = start - 1; i <= allTotalChapter; i++) {
       setListChapter((prevListChapter) => {
         return [
           ...prevListChapter,
-          <li key={i} className="chapter-item">
-            <Link href={`${comicSlug}/${i}`} className="btn">
-              Chapter {i}
+          <li key={chapterList[i].chapter_api_data} className="chapter-item">
+            <Link
+              href={`${comicSlug}/${chapterList[i].chapter_name}`}
+              className="btn"
+            >
+              Chapter {chapterList[i].chapter_name}
             </Link>
           </li>,
         ];
       });
+      if (chapterList[i].chapter_name == end) {
+        break;
+      }
     }
   }
 

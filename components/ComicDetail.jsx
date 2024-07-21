@@ -18,10 +18,13 @@ export default async function ComicDetail({ comicSlug }) {
     comicCategory[Math.floor(Math.random() * comicCategory.length)];
   const randomPage = Math.floor(Math.random() * 100);
   const recommendComic = await GetGenreComic(randomPage, randomCategory.slug);
+  const chapterList = comicInformation.item.chapters[0].server_data;
 
   let totalChapter = 0;
+  let allTotalChapter = 0;
   if (comicInformation.item.chapters[0]) {
-    totalChapter = comicInformation.item.chapters[0].server_data.length;
+    totalChapter = chapterList[chapterList.length - 1].chapter_name;
+    allTotalChapter = comicInformation.item.chapters[0].server_data.length;
   }
 
   let comicStatus = comicInformation.item.status;
@@ -61,7 +64,12 @@ export default async function ComicDetail({ comicSlug }) {
           <FavoriteBtn comicSlug={comicSlug} />
         </div>
       </div>
-      <SelectChapter comicSlug={comicSlug} totalChapter={totalChapter} />
+      <SelectChapter
+        comicSlug={comicSlug}
+        totalChapter={totalChapter}
+        allTotalChapter={allTotalChapter}
+        chapterList={chapterList}
+      />
       <Comment comicSlug={comicSlug} />
       <div className="recommend-comic">
         <h2>Có thể bạn sẽ thích</h2>
