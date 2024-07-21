@@ -40,7 +40,9 @@ async function LoadChapter({ comicSlug, chapter }) {
         </div>
         <ChapterControl chapter={chapter} chapterList={chapterList} />
       </div>
-      <Comment comicSlug={comicSlug} />
+      <div style={{ margin: "0px 75px" }}>
+        <Comment comicSlug={comicSlug} />
+      </div>
     </>
   );
 }
