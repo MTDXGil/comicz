@@ -22,8 +22,8 @@ export default async function ComicDetail({ comicSlug }) {
   let totalChapter = 0;
   let chapterList = [];
   if (comicInformation.item.chapters[0]) {
-    totalChapter = chapterList[chapterList.length - 1].chapter_name;
     chapterList = comicInformation.item.chapters[0].server_data;
+    totalChapter = chapterList[chapterList.length - 1].chapter_name;
   }
 
   let comicStatus = comicInformation.item.status;
