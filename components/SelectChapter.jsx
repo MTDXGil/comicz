@@ -6,7 +6,6 @@ import { useState } from "react";
 export default function SelectChapter({
   comicSlug,
   totalChapter,
-  allTotalChapter,
   chapterList,
 }) {
   const [listChapter, setListChapter] = useState([]);
@@ -15,7 +14,7 @@ export default function SelectChapter({
 
   async function handleChapterBlockClick(start, end) {
     setListChapter([]);
-    for (let i = start - 1; i <= allTotalChapter; i++) {
+    for (let i = start - 1; i <= chapterList.length; i++) {
       setListChapter((prevListChapter) => {
         return [
           ...prevListChapter,

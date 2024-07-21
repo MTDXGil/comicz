@@ -18,13 +18,12 @@ export default async function ComicDetail({ comicSlug }) {
     comicCategory[Math.floor(Math.random() * comicCategory.length)];
   const randomPage = Math.floor(Math.random() * 100);
   const recommendComic = await GetGenreComic(randomPage, randomCategory.slug);
-  const chapterList = comicInformation.item.chapters[0].server_data;
 
   let totalChapter = 0;
-  let allTotalChapter = 0;
+  let chapterList = [];
   if (comicInformation.item.chapters[0]) {
     totalChapter = chapterList[chapterList.length - 1].chapter_name;
-    allTotalChapter = comicInformation.item.chapters[0].server_data.length;
+    chapterList = comicInformation.item.chapters[0].server_data;
   }
 
   let comicStatus = comicInformation.item.status;
@@ -67,7 +66,6 @@ export default async function ComicDetail({ comicSlug }) {
       <SelectChapter
         comicSlug={comicSlug}
         totalChapter={totalChapter}
-        allTotalChapter={allTotalChapter}
         chapterList={chapterList}
       />
       <Comment comicSlug={comicSlug} />
