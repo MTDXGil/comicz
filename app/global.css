@@ -843,6 +843,7 @@ footer span {
 }
 
 .dropdown-menu-button {
+  color: black;
   display: none;
   border: none;
   background: transparent;
@@ -903,6 +904,10 @@ footer span {
   display: inline-block;
   width: 100%;
   padding: 25px 20px;
+}
+
+.dropdown-auth {
+  display: none;
 }
 
 @media (max-width: 1383px) {
@@ -1114,6 +1119,19 @@ footer span {
 
   .chapter-container h1 {
     font-size: 23px;
+  }
+
+  .third-footer-col input {
+    width: 50%;
+  }
+
+  .navbar-action a,
+  .navbar-action button {
+    display: none;
+  }
+
+  .dropdown-auth {
+    display: block;
   }
 }
 
