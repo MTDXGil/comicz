@@ -11,15 +11,15 @@ import { toast } from "react-toastify";
 
 export default function FavoriteBtn({ comicSlug }) {
   const isLogin = useSelector((state) => state.user.isLogin);
+  const favoriteComics = useSelector((state) => state.user.favoriteComics);
   const dispatch = useDispatch();
 
   const [isAdded, setIsAdded] = useState(false);
   const notify = (type, text) => toast[type](text);
 
   useEffect(() => {
-    const savedState = localStorage.getItem(`favorite_${comicSlug}`);
-    if (savedState) setIsAdded(true);
-  }, [comicSlug]);
+    if (favoriteComics.includes(comicSlug)) setIsAdded(true);
+  }, [favoriteComics, comicSlug]);
 
   async function handleClick() {
     if (isLogin) {
